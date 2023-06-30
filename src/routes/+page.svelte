@@ -1,4 +1,17 @@
 <script>
+	import Home from './Home.svelte';
+</script>
+
+<svelte:head>
+	<title>Home</title>
+	<meta name="description" content="Svelte demo app" />
+</svelte:head>
+
+<section>
+	<Home />
+</section>
+
+<!-- <script>
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
@@ -56,4 +69,4 @@
 		top: 0;
 		display: block;
 	}
-</style>
+</style> -->
