@@ -7,6 +7,7 @@
 	// let firstDay = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 	// let lastDay = `${new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)}`.split(' ');
 	import Calendar from './calendar/Calendar.svelte';
+	let currentDate = new Date();
 </script>
 
 <section class="m-0">
@@ -14,7 +15,7 @@
 		<p class="text-3xl text-center">Memories Square</p>
 		<!-- <div>{nowMonth}</div>
 		<div>{lastDay}</div> -->
-		<div><Calendar /></div>
+		<div><Calendar date={currentDate} /></div>
 	</div>
 </section>
 
