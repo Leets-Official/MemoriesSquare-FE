@@ -16,22 +16,39 @@
 		return days;
 	};
 
-	let dayNum;
-	let dayStr;
+	let days = [];
+	let weeks = [];
 
-	const updateCalendar = () => {
+	const updateCalendar = (date) => {
 		const year = date.getFullYear();
 		const month = date.getMonth();
 
 		const daysInMonth = getDaysLength(year, month);
-		dayStr = getDays(year, month);
-		console.log(daysInMonth);
+		const dayNum = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+		const dayStr = getDays(year, month);
 
-		dayNum = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+		for (let i = 0; i < daysInMonth; i++){
+			days[i] = [dayNum[i], dayStr[i]];	// days[i] = [날짜, 요일] 
+		}
+		console.log(days)
+
+		let tempArr = [];
+		for (let i = 0; i < daysInMonth; i++){
+			if (dayStr[i] == 0 && i != 0)
+			{
+				weeks.push(tempArr);
+				tempArr = [];
+			}
+			tempArr.push(dayStr[i]);
+		}
+		if (tempArr){
+			weeks.push(tempArr);
+		}
+		console.log(weeks)
 	};
 
 	$: {
-		updateCalendar();
+		updateCalendar(date);
 	}
 </script>
 
@@ -76,11 +93,9 @@
 				</th>
 			</tr>
 		</thead>
-		{#each dayNum as day}
-			<p class="day">{day}</p>
-		{/each}
-		{#each dayStr as day}
-			<p>{week[day]}</p>
+		{#each days as day}
+			<p>{day[0]}</p>
+			<p>{week[day[1]]}</p>
 		{/each}
 	</table>
 </div>
