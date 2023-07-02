@@ -1,101 +1,61 @@
 <script>
-	export let date;
+	import { onMount } from "svelte";
 
-	const week = { 0: 'SUN', 1: 'MON', 2: 'TUE', 3: 'WED', 4: 'THU', 5: 'FRI', 6: 'SAT' };
-
-	const getDaysLength = (nowYear, nowMonth) => {
-		return new Date(nowYear, nowMonth + 1, 0).getDate();
-	};
-
-	const getDays = (nowYear, nowMonth) => {
-		const days = [];
-		const lastDay = new Date(nowYear, nowMonth + 1, 0).getDate();
-		for (let i = 1; i <= lastDay; i++) {
-			days.push(new Date(nowYear, nowMonth, i).getDay());
-		}
-		return days;
-	};
-
+	const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+	let currentDate = new Date();
 	let days = [];
-	let weeks = [];
+	
+	onMount(() => {
+		render();
+	});
 
-	const updateCalendar = (date) => {
-		const year = date.getFullYear();
-		const month = date.getMonth();
-
-		const daysInMonth = getDaysLength(year, month);
-		const dayNum = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-		const dayStr = getDays(year, month);
-
-		for (let i = 0; i < daysInMonth; i++){
-			days[i] = [dayNum[i], dayStr[i]];	// days[i] = [날짜, 요일] 
-		}
-		console.log(days)
-
-		let tempArr = [];
-		for (let i = 0; i < daysInMonth; i++){
-			if (dayStr[i] == 0 && i != 0)
-			{
-				weeks.push(tempArr);
-				tempArr = [];
-			}
-			tempArr.push(dayStr[i]);
-		}
-		if (tempArr){
-			weeks.push(tempArr);
-		}
-		console.log(weeks)
+	const render = () => {
+		const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+		const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+		days = Array.from({length: daysInMonth + firstDay}, (_, idx) => {
+			const day = idx + 1 - firstDay;
+			const weekDay = weekDays[idx % 7];
+			return {
+				day: day > 0 ? day : "",
+				weekDay : weekDay
+			};
+		});
 	};
 
-	$: {
-		updateCalendar(date);
+	const previousMonth = () => {
+		currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+		console.log(currentDate)
+		render();
 	}
+
+	const nextMonth = () => {
+		currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+		render();
+	};
+	render()
 </script>
 
-<div class="flex items-center justify-between pt-12 overflow-x-auto">
-	<table class="calendar w-full">
-		<thead>
-			<tr>
-				<th>
-					<div class="w-full flex justify-center">
-						<p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Mo</p>
-					</div>
-				</th>
-				<th>
-					<div class="w-full flex justify-center">
-						<p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Tu</p>
-					</div>
-				</th>
-				<th>
-					<div class="w-full flex justify-center">
-						<p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">We</p>
-					</div>
-				</th>
-				<th>
-					<div class="w-full flex justify-center">
-						<p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Th</p>
-					</div>
-				</th>
-				<th>
-					<div class="w-full flex justify-center">
-						<p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Fr</p>
-					</div>
-				</th>
-				<th>
-					<div class="w-full flex justify-center">
-						<p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Sa</p>
-					</div>
-				</th>
-				<th>
-					<div class="w-full flex justify-center">
-						<p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Su</p>
-					</div>
-				</th>
-			</tr>
-		</thead>
-		{#each days as day}
-			<p>{day[0]}</p>
-			<p>{week[day[1]]}</p>
+<div class="calendar">
+	<div class="header flex items-center justify-between mb-8 mt-8"> 
+		<button class="px-4" on:click={previousMonth}>{"<"}</button>
+		<h2 class="text-lg font-semibold">
+			{currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
+		</h2>
+		<button class="px-4" on:click={nextMonth}>{">"}</button>
+	</div>
+
+	<div class="weekDays grid grid-cols-7 gap-2">
+		{#each weekDays as weekDay}
+			<div class="bg-gray-200 text-gray-800 py-2 text-center rounded">{weekDay}</div>
 		{/each}
-	</table>
+	</div>
+
+	<div class="grid grid-cols-7 gap-2">
+		{#each days as { day, weekDay }}
+			<div class="border border-gray-200 rounded p-4 flex flex-col items-center justify-center">
+				<div class="text-lg font-semibold">{day}</div>
+				<div class="text-sm">{weekDay}</div>
+			</div>
+		{/each}
+	</div>
 </div>
