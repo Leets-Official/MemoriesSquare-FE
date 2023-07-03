@@ -44,16 +44,16 @@
 		<button class="px-4" on:click={nextMonth}>{">"}</button>
 	</div>
 
-	<div class="weekDays grid grid-cols-7 gap-2">
+	<div class="weekDays grid grid-cols-7">
 		{#each weekDays as weekDay}
-			<div class="bg-gray-200 text-gray-800 py-2 text-center rounded">{weekDay}</div>
+			<div class="bg-gray-200 text-gray-800 border-r border-y border-gray-500 py-2 text-center">{weekDay}</div>
 		{/each}
 	</div>
 
-	<div class="grid grid-cols-7 gap-2">
+	<div class="grid grid-cols-7">
 		{#each days as { day, weekDay }}
-			<div class="border border-gray-200 rounded p-4 flex flex-col items-center justify-center">
-				<div class="text-lg font-semibold">{day}</div>
+			<div class="border-r border-b border-gray-500 p-4 flex flex-col items-center justify-center">
+				<div class="text-medium font-semibold">{day}</div>
 				<div class="text-sm">{weekDay}</div>
 			</div>
 		{/each}
