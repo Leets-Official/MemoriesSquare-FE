@@ -1,14 +1,21 @@
 <svelte:head>
 	<title>Memories Square Login</title>
-	<meta name="description" content="About this app" />
+	<meta name="description" content="login" />
 </svelte:head>
 
+<script>
+	const googleLoginHref = import.meta.env.VITE_SERVER_URL + "/oauth/login/google"
+	const facebookLoginHref = import.meta.env.VITE_SERVER_URL + "/oauth/login/facebook"
+
+	console.log(googleLoginHref)
+
+</script>
 <div class="p-3 flex flex-col justify-between h-full">
 	<p class="text-3xl text-center pt-10">Memories Square</p>
 	<div class="p-6 space-y-4 lg:space-y-6 sm:p-8">
 		<div class="items-center space-y-3">
 			<a
-				href="https://api.crazyform.co/oauth/login/google"
+				href="{googleLoginHref}"
 				class="w-full inline-flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
 			>
 				<svg
@@ -40,7 +47,7 @@
 				구글계정으로 로그인
 			</a>
 			<a
-				href="https://api.crazyform.co/oauth/login/facebook"
+				href="{facebookLoginHref}"
 				class="w-full inline-flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
 			>
 				<svg
