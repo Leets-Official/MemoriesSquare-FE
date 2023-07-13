@@ -4,7 +4,8 @@
 </svelte:head>
 
 <script>
- import { onMount } from 'svelte';
+ 	import { onMount } from 'svelte';
+	import springFetch from "../../lib/api"
 
 	let token = '';
 
@@ -14,6 +15,6 @@
 	token = searchParams.get('token');
 	console.log(token)
 
-	
+	springFetch("")
 	})
 </script>
