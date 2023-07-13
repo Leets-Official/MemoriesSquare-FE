@@ -1,4 +1,4 @@
-import { access_token, is_login } from "./store"
+import { is_login } from "./store"
 const springFetch = (operation, url, params, access_token, returnData) => {
     let method = operation
     let content_type = 'application/json'
