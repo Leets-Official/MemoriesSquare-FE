@@ -6,10 +6,10 @@
             7 : {
                 1: {
 					"weekDay": "imsy",
-					"photos": 4,
+					"photos": 5,
 				},
 				6: {
-					"photos": 6,
+					"photos": 10,
 				},
 				7: {
 					"photos": 1,
@@ -52,16 +52,44 @@
 			}
 		})
 		// DUMMY_DATA의 background color 초기화
-		for (const day in DUMMY_DATA[thisYear][thisMonth]){
+		// for (const day in DUMMY_DATA[thisYear][thisMonth]){
+		// 	const photoCount = DUMMY_DATA[thisYear][thisMonth][day]["photos"];
+		// 	if(photoCount > 5){
+		// 		DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-500 ";
+		// 	} else if (photoCount > 3){
+		// 		DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-500";
+		// 	} else if (photoCount > 0){
+		// 		DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-600";
+		// 	}
+		// }
+
+		for (const day in DUMMY_DATA[thisYear][thisMonth]) {
 			const photoCount = DUMMY_DATA[thisYear][thisMonth][day]["photos"];
-			if(photoCount > 5){
-				DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-400";
-			} else if (photoCount > 3){
-				DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-500";
-			} else if (photoCount > 0){
-				DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-600";
+			if (photoCount === 0) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-white";
+			} else if (photoCount === 1) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-emerald-500/[0.1]";
+			} else if (photoCount === 2) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-emerald-500/[0.2]";
+			} else if (photoCount === 3) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-emerald-500/[0.3]";
+			} else if (photoCount === 4) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-emerald-500/[0.4]";
+			}else if (photoCount === 5) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-emerald-500/[0.5]";
+			}else if (photoCount === 6) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-emerald-500/[0.6]";
+			}else if (photoCount === 7) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-emerald-500/[0.7]";
+			}else if (photoCount === 8) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-emerald-500/[0.8]";
+			}else if (photoCount === 9) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-emerald-500/[0.9]";
+			}else if (photoCount >= 10) {
+			DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-emerald-500/[0.5]";
 			}
 		}
+
 		console.log(DUMMY_DATA)
 	};
 
