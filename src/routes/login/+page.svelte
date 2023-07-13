@@ -8,7 +8,7 @@
 	<div class="p-6 space-y-4 lg:space-y-6 sm:p-8">
 		<div class="items-center space-y-3">
 			<a
-				href="#"
+				href=""
 				class="w-full inline-flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
 			>
 				<svg
@@ -40,7 +40,7 @@
 				구글계정으로 로그인
 			</a>
 			<a
-				href="#"
+				href="https://api.crazyform.co/oauth/login/facebook"
 				class="w-full inline-flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
 			>
 				<svg

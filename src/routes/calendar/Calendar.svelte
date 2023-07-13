@@ -1,7 +1,18 @@
 <script>
 	import { onMount } from "svelte";
 
+	let DUMMY_DATA = {
+        2023 : {
+            7 : {
+                1: {
+					"weekDay": "imsy",
+					"photos": 4,
+				}
+            }
+        }
+    }
 	const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+	const grassColor = ["#008000", "#32CD32", "#00FF00"]
 	let currentDate = new Date();
 	let days = [];
 	
@@ -10,8 +21,9 @@
 	});
 
 	const render = () => {
-		const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
-		const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+		const [thisYear, thisMonth] = [currentDate.getFullYear(), currentDate.getMonth()];
+		const firstDay = new Date(thisYear, thisMonth, 1).getDay();
+		const daysInMonth = new Date(thisYear, thisMonth + 1, 0).getDate();
 		days = Array.from({length: daysInMonth + firstDay}, (_, idx) => {
 			const day = idx + 1 - firstDay;
 			const weekDay = weekDays[idx % 7];
@@ -20,6 +32,20 @@
 				weekDay : weekDay
 			};
 		});
+
+		// 이번 달의 DUMMY_DATA 초기화
+		if(!(thisYear in DUMMY_DATA)){
+			DUMMY_DATA[thisYear] = {};
+		}
+		if (!((thisMonth + 1) in DUMMY_DATA[thisYear])){
+			DUMMY_DATA[thisYear][thisMonth + 1] = {};
+		}
+		days.forEach(eachDay => {
+			if(eachDay.day !== "" && !(eachDay.day in DUMMY_DATA[thisYear][thisMonth + 1])){
+				DUMMY_DATA[thisYear][thisMonth + 1][eachDay.day] = {"weekDay": eachDay.weekDay, "photos":0};
+			}
+		})
+		console.log(DUMMY_DATA);
 	};
 
 	const previousMonth = () => {
@@ -32,7 +58,7 @@
 		currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
 		render();
 	};
-	render()
+	// render()
 </script>
 
 <div class="calendar">
