@@ -7,13 +7,19 @@
                 1: {
 					"weekDay": "imsy",
 					"photos": 4,
+				},
+				6: {
+					"photos": 6,
+				},
+				7: {
+					"photos": 1,
 				}
             }
         }
     }
 	const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-	const grassColor = ["#008000", "#32CD32", "#00FF00"]
 	let currentDate = new Date();
+	let thisYear, thisMonth;
 	let days = [];
 	
 	onMount(() => {
@@ -21,9 +27,9 @@
 	});
 
 	const render = () => {
-		const [thisYear, thisMonth] = [currentDate.getFullYear(), currentDate.getMonth()];
-		const firstDay = new Date(thisYear, thisMonth, 1).getDay();
-		const daysInMonth = new Date(thisYear, thisMonth + 1, 0).getDate();
+		[thisYear, thisMonth] = [currentDate.getFullYear(), currentDate.getMonth() + 1];
+		const firstDay = new Date(thisYear, thisMonth - 1, 1).getDay();
+		const daysInMonth = new Date(thisYear, thisMonth, 0).getDate();
 		days = Array.from({length: daysInMonth + firstDay}, (_, idx) => {
 			const day = idx + 1 - firstDay;
 			const weekDay = weekDays[idx % 7];
@@ -37,20 +43,30 @@
 		if(!(thisYear in DUMMY_DATA)){
 			DUMMY_DATA[thisYear] = {};
 		}
-		if (!((thisMonth + 1) in DUMMY_DATA[thisYear])){
-			DUMMY_DATA[thisYear][thisMonth + 1] = {};
+		if (!(thisMonth in DUMMY_DATA[thisYear])){
+			DUMMY_DATA[thisYear][thisMonth] = {};
 		}
 		days.forEach(eachDay => {
-			if(eachDay.day !== "" && !(eachDay.day in DUMMY_DATA[thisYear][thisMonth + 1])){
-				DUMMY_DATA[thisYear][thisMonth + 1][eachDay.day] = {"weekDay": eachDay.weekDay, "photos":0};
+			if(eachDay.day !== "" && !(eachDay.day in DUMMY_DATA[thisYear][thisMonth])){
+				DUMMY_DATA[thisYear][thisMonth][eachDay.day] = {"weekDay": eachDay.weekDay, "photos":0, "bg": "bg-white"};
 			}
 		})
-		console.log(DUMMY_DATA);
+		// DUMMY_DATA의 background color 초기화
+		for (const day in DUMMY_DATA[thisYear][thisMonth]){
+			const photoCount = DUMMY_DATA[thisYear][thisMonth][day]["photos"];
+			if(photoCount > 5){
+				DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-400";
+			} else if (photoCount > 3){
+				DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-500";
+			} else if (photoCount > 0){
+				DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-600";
+			}
+		}
+		console.log(DUMMY_DATA)
 	};
 
 	const previousMonth = () => {
 		currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
-		console.log(currentDate)
 		render();
 	}
 
@@ -58,7 +74,6 @@
 		currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
 		render();
 	};
-	// render()
 </script>
 
 <div class="calendar">
@@ -78,7 +93,7 @@
 
 	<div class="grid grid-cols-7">
 		{#each days as { day, weekDay }}
-			<div class="border-r border-b border-gray-500 p-4 flex flex-col items-center justify-center">
+			<div class={`${day !== "" ? DUMMY_DATA[thisYear][thisMonth][day]["bg"] : "bg-white"} border-r border-b border-gray-500 p-4 flex flex-col items-center justify-center`}>
 				<div class="text-medium font-semibold">{day}</div>
 				<div class="text-sm">{weekDay}</div>
 			</div>
