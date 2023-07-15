@@ -70,17 +70,6 @@
 			}
 		})
 		// DUMMY_DATA의 background color 초기화
-		// for (const day in DUMMY_DATA[thisYear][thisMonth]){
-		// 	const photoCount = DUMMY_DATA[thisYear][thisMonth][day]["photos"];
-		// 	if(photoCount > 5){
-		// 		DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-500 ";
-		// 	} else if (photoCount > 3){
-		// 		DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-500";
-		// 	} else if (photoCount > 0){
-		// 		DUMMY_DATA[thisYear][thisMonth][day]["bg"] = "bg-green-600";
-		// 	}
-		// }
-
 		for (const day in DUMMY_DATA[thisYear][thisMonth]) {
 			const photoCount = DUMMY_DATA[thisYear][thisMonth][day]["photos"];
 			if (photoCount === 0) {
