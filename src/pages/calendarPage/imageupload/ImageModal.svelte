@@ -1,6 +1,6 @@
 <script>
-    export let isOpen = false;
-    export let selectedImage = null;
+    let isOpen = false;
+    let selectedImage = null;
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];

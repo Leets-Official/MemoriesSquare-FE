@@ -1,6 +1,6 @@
 <script>
 	import Calendar from './calendar/Calendar.svelte';
-	import ImageModal from "./calendar/imageupload/ImageModal.svelte";
+	import ImageModal from "./imageupload/ImageModal.svelte";
 </script>
 
 <section class="m-0">
@@ -14,11 +14,3 @@
 		</div>
 	</div>
 </section>
-
-<style>
-	/* :global(body) {
-		background: linear-gradient(#f0ffff, #ccffff, #9afeff);
-		background-repeat: no-repeat;
-		background-attachment: fixed;
-	} */
-</style>
