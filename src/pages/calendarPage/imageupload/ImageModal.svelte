@@ -16,7 +16,31 @@
 
     const closeImageModal = () => {
         selectedImage = null;
-        isOpen = false;
+        isOpen = false
+    }
+
+    const request = async(data) => {
+        try {
+            const res = await fetch("https://api.crazyform.co/photo/upload", {
+                method: "POST",
+                body: data
+            })
+
+            if (res.ok) return await res.json();
+            throw new Error("Image Upload failed.")
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    const confirmUpload = () => {
+        if (selectedImage){
+            const formData = new FormData();
+            formData.append('file', selectedImage);
+            
+            const imsy = request(formData);
+            console.log(imsy)
+        }
     }
 </script>
 
@@ -31,7 +55,10 @@
             <div class="image-modal-content py-4 px-6">
                 <h2 class="text-xl mb-5">오늘의 사진 업로드</h2>
                 <input type="file" accept="image/*" on:change={handleImageUpload}>
-                <button class="ml-6 px-4 py-2 bg-gray-800 text-white rounded" on:click={closeImageModal}>닫기</button>
+                <div class="flex justify-end mt-5">
+                    <button class="px-4 py-2 mr-2 bg-blue-500 text-white rounded" on:click={confirmUpload}>확인</button>
+                    <button class="ml-2 px-4 py-2 bg-gray-800 text-white rounded" on:click={closeImageModal}>닫기</button>
+                </div>
             </div>
         </div>
     </div>
