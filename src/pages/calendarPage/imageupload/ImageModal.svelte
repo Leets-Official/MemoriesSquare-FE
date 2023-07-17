@@ -44,10 +44,8 @@
     }
 </script>
 
-<div>
-    <button on:click="{openImageModal}" class="bg-white hover:bg-gray-100 float-right text-gray-800 font-semibold m-6 py-2 px-4 border:none border-gray-400 rounded shadow">
-        내 앨범
-    </button>
+<div class="flex flex-wrap mt-12">
+    <button on:click="{openImageModal}" class="px-4 py-2 mx-auto bg-blue-500 text-white rounded">오늘의 사진 올리기</button>
     {#if isOpen}
         <div class="fixed inset-0 flex items-center justify-center z-50">
         <div class="overlay fixed inset-0 bg-gray-900 opacity-50"></div>
