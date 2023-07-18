@@ -116,12 +116,21 @@
 </script>
 
 <div class="calendar">
-  <div class="header flex items-center justify-between mb-8 mt-8">
-    <button class="px-4" on:click={previousMonth}>{'<'}</button>
+  <div class="header flex items-center justify-between my-6">
+    <div class="h-6 w-6 flex items-center justify-center mx-4">
+      <button class="h-6 w-6 rounded" on:click={previousMonth}
+        ><i class="fa-solid fa-chevron-left" /></button
+      >
+    </div>
+
     <h2 class="text-lg font-semibold">
       {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
     </h2>
-    <button class="px-4" on:click={nextMonth}>{'>'}</button>
+    <div class="h-6 w-6 flex items-center justify-center mx-4">
+      <button class="h-6 w-6 rounded" on:click={nextMonth}
+        ><i class="fa-solid fa-chevron-right" /></button
+      >
+    </div>
   </div>
 
   <div class="weekDays grid grid-cols-7">
