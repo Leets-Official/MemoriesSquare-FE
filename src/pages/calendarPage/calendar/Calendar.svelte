@@ -35,7 +35,7 @@
       }
     }
   };
-  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
   let currentDate = new Date();
   let thisYear, thisMonth;
   let days = [];
