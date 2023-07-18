@@ -1,15 +1,13 @@
 <script>
-	import Home from '../pages/Home.svelte';
+  import Home from '../pages/Home.svelte';
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+  <title>Home</title>
+  <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
-	<Home />
-</section>
+<Home />
 
 <!-- <script>
 	import Counter from './Counter.svelte';
