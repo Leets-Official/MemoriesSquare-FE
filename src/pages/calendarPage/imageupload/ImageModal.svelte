@@ -21,7 +21,7 @@
 
     const request = async(data) => {
         try {
-            const res = await fetch("https://api.crazyform.co/photo/upload", {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/photo/upload`, {
                 method: "POST",
                 body: data
             })
