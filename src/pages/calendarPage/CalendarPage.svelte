@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="mt-10">
+    <div class="mt-6">
       <Calendar />
     </div>
   </div>
