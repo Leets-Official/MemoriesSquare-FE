@@ -133,15 +133,17 @@
     </div>
   </div>
 
-  <div class="weekDays grid grid-cols-7">
+  <div class="weekDays grid grid-cols-7 border-l border-gray-500">
     {#each weekDays as weekDay}
-      <div class="bg-gray-200 text-gray-800 border-r border-y border-gray-500 py-2 text-center">
+      <div
+        class="bg-gray-200 text-gray-800 border-r border-y border-gray-500 py-2 text-center text-sm"
+      >
         {weekDay}
       </div>
     {/each}
   </div>
 
-  <div class="grid grid-cols-7">
+  <div class="grid grid-cols-7 border-l border-gray-500">
     {#each days as { day, weekDay }}
       <div class="relative" style="padding-bottom:100%">
         <div

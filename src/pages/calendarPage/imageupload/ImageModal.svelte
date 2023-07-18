@@ -47,7 +47,7 @@
 <div class="flex justify-center w-full max-w-lg fixed bottom-5">
   <button
     on:click={openImageModal}
-    class="px-5 py-2 mx-auto fixed-btn text-white rounded-full font-medium text-base shadow"
+    class="px-5 py-2 mx-auto fixed-btn text-white rounded-full font-medium text-base shadow shadow-blue-500"
     ><i class="fa-solid fa-image mr-2.5" />오늘의 사진 올리기</button
   >
   {#if isOpen}

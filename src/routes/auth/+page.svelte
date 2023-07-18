@@ -15,7 +15,7 @@
       $email = data.result.email;
       $vendor = data.result.vendor;
       $createdAt = data.result.createdAt;
-      window.location.href = import.meta.env.VITE_SERVER_URL;
+      window.location.href = import.meta.env.VITE_FRONTEND_URL;
     });
   });
 </script>
