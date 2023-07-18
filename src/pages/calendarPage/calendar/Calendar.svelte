@@ -143,13 +143,15 @@
 
   <div class="grid grid-cols-7">
     {#each days as { day, weekDay }}
-      <div
-        class={`${
-          day !== '' ? DUMMY_DATA[thisYear][thisMonth][day]['bg'] : 'bg-white'
-        } border-r border-b border-gray-500 p-4 flex flex-col items-center justify-center`}
-      >
-        <div class="text-medium font-medium">{day}</div>
-        <!-- <div class="text-sm">{weekDay}</div> -->
+      <div class="relative" style="padding-bottom:100%">
+        <div
+          class={`${
+            day !== '' ? DUMMY_DATA[thisYear][thisMonth][day]['bg'] : 'bg-white'
+          } border-r border-b border-gray-500 p-3 flex flex-col items-center justify-center absolute w-full h-full`}
+        >
+          <div class="text-medium font-medium">{day}</div>
+          <!-- <div class="text-sm">{weekDay}</div> -->
+        </div>
       </div>
     {/each}
   </div>
