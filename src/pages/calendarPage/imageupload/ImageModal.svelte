@@ -1,4 +1,5 @@
 <script>
+  import { access_token } from '../../../lib/store';
   let isOpen = false;
   let selectedImage = null;
 
@@ -22,7 +23,11 @@
   const request = async (data) => {
     try {
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/photo/upload`, {
-        method: 'POST',
+        method: 'post',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: 'Bearer ' + $access_token
+        },
         body: data
       });
 
@@ -55,8 +60,6 @@
       <div class="overlay fixed inset-0 bg-gray-900 opacity-50" />
       <div class="image-modal-container bg-white rounded shadow-lg z-50 w-full max-w-lg mx-6">
         <div class="image-modal-content p-6">
-          <h2 class="text-xl mb-4">오늘의 사진 업로드</h2>
-
           <div class="flex items-center justify-center w-full">
             <label
               for="dropzone-file"
