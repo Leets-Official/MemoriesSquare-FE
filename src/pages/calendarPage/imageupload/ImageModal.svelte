@@ -96,12 +96,12 @@
             </label>
           </div>
 
-          <div class="grid grid-cols-2 w-full gap-2 mt-5">
-            <button class="px-4 py-2 bg-gray-500 text-white rounded" on:click={closeImageModal}
-              >취소</button
-            >
+          <div class="flex flex-col w-full gap-2 mt-5">
             <button class="px-4 py-2 bg-blue-500 text-white rounded" on:click={confirmUpload}
               >확인</button
+            >
+            <button class="py-1 text-gray-500 hover:underline" on:click={closeImageModal}
+              >취소</button
             >
           </div>
         </div>
