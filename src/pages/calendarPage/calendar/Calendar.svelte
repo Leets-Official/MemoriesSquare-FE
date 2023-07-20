@@ -15,7 +15,7 @@
           photos: 1
         },
         8: {
-          photos: 4
+          photos: 4,
         },
         9: {
           photos: 1
@@ -39,6 +39,7 @@
   let currentDate = new Date();
   let thisYear, thisMonth;
   let days = [];
+  let selectedDay = '';
 
   onMount(() => {
     render();
@@ -113,6 +114,10 @@
     currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
     render();
   };
+
+  const getSelectedDay = (day) => {
+    selectedDay = day;
+  }
 </script>
 
 <div class="calendar">
@@ -145,16 +150,27 @@
 
   <div class="grid grid-cols-7 border-l border-gray-500">
     {#each days as { day, weekDay }}
-      <div class="relative" style="padding-bottom:100%">
+      <button class="relative" style="padding-bottom:100%" on:click={getSelectedDay(day)}>
         <div
           class={`${
             day !== '' ? DUMMY_DATA[thisYear][thisMonth][day]['bg'] : 'bg-white'
-          } border-r border-b border-gray-500 p-3 flex flex-col items-center justify-center absolute w-full h-full`}
+          } border-r border-b border-gray-500 p-3 flex flex-col items-center justify-center absolute w-full h-full cursor-pointer hover:opacity-70`}
         >
           <div class="text-medium font-medium">{day}</div>
           <!-- <div class="text-sm">{weekDay}</div> -->
         </div>
-      </div>
+      </button>
     {/each}
+  </div>
+
+  <div class="todayImage relative">
+    {#if selectedDay}
+      <hr class="border-2 border-solid border-blue-400 mt-8">
+      <hr class="border-l-4 border-blue-400 h-80 ml-12">
+      <div class="absolute top-8 left-11 flex items-center">
+        <div class="rounded-full w-3 h-3 bg-blue-700"></div>
+        <div class="ml-3 text-lg font-semibold">{`${thisYear}년 ${thisMonth}월 ${selectedDay}일`}</div>
+      </div>
+    {/if}
   </div>
 </div>
