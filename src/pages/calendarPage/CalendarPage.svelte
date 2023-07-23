@@ -3,7 +3,7 @@
   import ImageModal from './imageupload/ImageModal.svelte';
 </script>
 
-<section class="h-screen">
+<section>
   <div>
     <!-- <p class="text-3xl text-center">Memories Square</p> -->
     <div class="flex w-full items-center justify-center pt-4">
