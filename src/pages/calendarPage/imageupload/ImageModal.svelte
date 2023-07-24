@@ -25,7 +25,6 @@
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/photo/upload`, {
         method: 'post',
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization: 'Bearer ' + $access_token
         },
         body: data
