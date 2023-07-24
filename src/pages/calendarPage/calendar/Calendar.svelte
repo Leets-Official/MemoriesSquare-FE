@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte';
   import thin_black from "$lib/assets/thin_frame_black.png"
+  import { access_token } from '../../../lib/store';
+  import ImageHistory from './ImageHistory.svelte';
 
   let DUMMY_DATA = {
     2023: {
@@ -46,10 +48,36 @@
   let thisYear, thisMonth;
   let days = [];
   let selectedDay = '';
+  let userData;
+  const today = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate()
+  }
 
-  onMount(() => {
+  onMount(async() => {
+    userData = await request();
+    console.log(userData)
+    console.log("siba")
     render();
   });
+
+  const request = async () => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/photo`, {
+        method: 'get',
+        headers: {
+          Authorization: 'Bearer ' + $access_token
+        },
+      });
+
+      if (res.ok) return await res.json();
+      throw new Error('Fail for getting data.');
+    } catch (e) {
+      alert("유저 날짜 데이터를 받아오지 못했습니다.")
+      console.error(e);
+    }
+  };
 
   const render = () => {
     [thisYear, thisMonth] = [currentDate.getFullYear(), currentDate.getMonth() + 1];
@@ -109,6 +137,7 @@
     }
 
     console.log(DUMMY_DATA);
+    console.log(userData)
   };
 
   const previousMonth = () => {
@@ -127,6 +156,7 @@
 </script>
 
 <div class="calendar">
+  <div>{userData}</div>
   <div class="header flex items-center justify-between my-6">
     <div class="h-6 w-6 flex items-center justify-center mx-4">
       <button class="h-6 w-6 rounded" on:click={previousMonth}
@@ -155,39 +185,23 @@
   </div>
 
   <div class="grid grid-cols-7 border-l border-gray-500">
-    {#each days as { day, weekDay }}
-      <button class="relative" style="padding-bottom:100%" on:click={getSelectedDay(day)}>
-        <div
-          class={`${
-            day !== '' ? DUMMY_DATA[thisYear][thisMonth][day]['bg'] : 'bg-white'
-          } border-r border-b border-gray-500 p-3 flex flex-col items-center justify-center absolute w-full h-full cursor-pointer hover:opacity-70`}
-        >
+    {#each days as { day}}
+      <button class={`relative `} style="padding-bottom:100%" on:click={getSelectedDay(day)}>
+        <div class={`
+          ${(thisYear == today['year'] && thisMonth == today["month"] && day == today['day']) ? "shadow-today" : ""}
+          ${day !== '' ? DUMMY_DATA[thisYear][thisMonth][day]['bg'] : 'bg-white'} border-r border-b border-gray-500 p-3 flex flex-col items-center justify-center absolute w-full h-full cursor-pointer hover:opacity-70`
+        }>
           <div class="text-medium font-medium">{day}</div>
-          <!-- <div class="text-sm">{weekDay}</div> -->
         </div>
       </button>
     {/each}
   </div>
 
-  <div class="todayImage relative">
-    {#if selectedDay}
-      <hr class="border-2 border-solid border-blue-400 mt-8">
-      <div class="absolute top-6 left-9 flex items-center">
-        <div class="rounded-full w-3 h-3 bg-blue-700"></div>
-        <div class="ml-3 text-lg font-semibold">{`${thisYear}년 ${thisMonth}월 ${selectedDay}일`}</div>
-      </div>
-      <div class="flex">
-        <hr class="border-l-4 border-blue-400 h-auto ml-10">
-        <div class="image-container mt-16 ml-4 mb-16 flex flex-row flex-wrap gap-2">
-          {#if DUMMY_DATA[thisYear][thisMonth][selectedDay]['photos'] > 0}
-            {#each Array(DUMMY_DATA[thisYear][thisMonth][selectedDay]['photos']) as _}
-              <img class="w-20" src={thin_black} alt="frame"/>
-            {/each}
-          {:else}
-            <p class="mt-8">이 날에 업로드한 추억 사진이 없습니다. 🙁</p>
-          {/if}
-        </div>
-      </div>
-    {/if}
-  </div>
+  <ImageHistory thisYear={thisYear} thisMonth={thisMonth} selectedDay={selectedDay} DUMMY_DATA={DUMMY_DATA}/>
 </div>
+
+<style>
+  .shadow-today{
+    box-shadow: inset 0 0 10px rgba(0, 128, 0, 0.5);
+  }
+</style>

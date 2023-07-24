@@ -33,17 +33,26 @@
       if (res.ok) return await res.json();
       throw new Error('Image Upload failed.');
     } catch (e) {
+      alert("이미지 업로드에 실패했습니다.")
       console.error(e);
     }
   };
 
-  const confirmUpload = () => {
+  const confirmUpload = async() => {
+    console.log("xona")
     if (selectedImage) {
       const formData = new FormData();
       formData.append('file', selectedImage);
 
-      const imsy = request(formData);
-      console.log(imsy);
+      const imsy = await request(formData);
+      
+      if (!imsy){
+        console.error("이미지 업로드 요청에 에러가 발생했습니다.")
+        return;
+      }
+      console.log("ha", imsy);      
+      console.log("?")
+      closeImageModal();
     }
   };
 </script>
