@@ -2,8 +2,7 @@
     export let thisYear;
     export let thisMonth;
     export let selectedDay;
-    export let DUMMY_DATA;
-    import thin_black from "$lib/assets/thin_frame_black.png"
+    export let imageDatas;
 </script>
 
 <div class="todayImage relative">
@@ -16,9 +15,9 @@
       <div class="flex">
         <hr class="border-l-4 border-blue-400 h-auto ml-10">
         <div class="image-container mt-16 ml-4 mb-16 flex flex-row flex-wrap gap-2">
-          {#if DUMMY_DATA[thisYear][thisMonth][selectedDay]['photos'] > 0}
-            {#each Array(DUMMY_DATA[thisYear][thisMonth][selectedDay]['photos']) as _}
-              <img class="w-20" src={thin_black} alt="frame"/>
+          {#if imageDatas.length > 0}
+            {#each Object.entries(imageDatas) as [key, _]}
+              <img class="w-20" src={imageDatas[key]['imageUrl']} alt="img"/>
             {/each}
           {:else}
             <p class="mt-8">이 날에 업로드한 추억 사진이 없습니다. 🙁</p>
