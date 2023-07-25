@@ -5,7 +5,6 @@
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    // 선택한 이미지를 사용자 정의 로직에 따라 처리
 
     selectedImage = file;
     console.log(selectedImage);
@@ -50,8 +49,6 @@
         console.error("이미지 업로드 요청에 에러가 발생했습니다.")
         return;
       }
-      console.log("ha", imsy);      
-      console.log("?")
       closeImageModal();
     }
   };

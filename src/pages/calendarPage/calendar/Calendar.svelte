@@ -25,6 +25,8 @@
     userImageData = getOnlyCroppedImage(userImageData['result']);
     const thisMonthImageCounts = await getImageCounts();
     imageCounts = thisMonthImageCounts['result']['count'];
+    console.log(imageCounts)
+    console.log(userImageData)
     render();
   });
 
@@ -113,9 +115,48 @@
   }
 
   const getBackgroundColor = (count) => {
-    if (count === 0 || count === undefined) return 'bg-white';
-    if (count < 10) return `bg-blue-500/[0.${count}]`;
-    else return 'bg-blue-500/[1]'; 
+    // console.log("count : ", count);
+    // if (count === 0 || count === undefined) return 'bg-white';
+    // if (count < 10) return `bg-blue-500/[0.${count}]`;
+    // else return 'bg-blue-500/[1]'; 
+    console.log(count)
+    let bgColor = 'bg-white';
+    switch(count) {
+      case 0: 
+      case undefined: 
+        break;
+      case 1:
+        bgColor = 'bg-blue-500/[0.1]';
+        break;
+      case 2:
+        bgColor = 'bg-blue-500/[0.2]';
+        break;
+      case 3:
+        bgColor = 'bg-blue-500/[0.3]';
+        break;
+      case 4:
+        bgColor = 'bg-blue-500/[0.4]';
+        break;
+      case 5:
+        bgColor = 'bg-blue-500/[0.5]';
+        break;
+      case 6:
+        bgColor = 'bg-blue-500/[0.6]';
+        break;
+      case 7:
+        bgColor = 'bg-blue-500/[0.7]';
+        break;
+      case 8:
+        bgColor = 'bg-blue-500/[0.8]';
+        break;
+      case 9:
+        bgColor = 'bg-blue-500/[0.9]';
+        break;
+      default:
+        bgColor = 'bg-blue-500/[1]';
+        break;
+    }
+    return bgColor;
   }
 
   const getOnlyCroppedImage = (datas) => {
@@ -165,7 +206,7 @@
       <button class={`relative `} style="padding-bottom:100%" on:click={getSelectedDay(day)}>
         <div class={`
           ${(thisYear == today['year'] && thisMonth == today["month"] && day == today['day']) ? "shadow-today" : ""}
-          ${day !== '' ? getBackgroundColor(imageCounts[`${thisYear}-${(thisMonth < 10) ? `0${thisMonth}` : thisMonth}-${day}`]) : 'bg-white'} border-r border-b border-gray-500 p-3 flex flex-col items-center justify-center absolute w-full h-full cursor-pointer hover:opacity-70`
+          ${day !== '' ? getBackgroundColor(imageCounts[`${thisYear}-${(thisMonth < 10) ? `0${thisMonth}` : thisMonth}-${(day < 10) ? `0${day}` : day}`]) : 'bg-white'} border-r border-b border-gray-500 p-3 flex flex-col items-center justify-center absolute w-full h-full cursor-pointer hover:opacity-70`
         }>
           <div class="text-medium font-medium">{day}</div>
         </div>
@@ -178,6 +219,6 @@
 
 <style>
   .shadow-today{
-    box-shadow: inset 0 0 20px rgba(0, 80, 100, 0.5);
+    box-shadow: inset 0 0 10px rgba(0, 110, 50, 0.5);
   }
 </style>
