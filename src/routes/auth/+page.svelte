@@ -9,6 +9,8 @@
     const token = searchParams.get('token');
 
     springFetch('get', '/user/me', '', token, (data) => {
+      // console.log(token);
+      // alert(token);
       $is_login = true;
       $id = data.result.id;
       $nickname = data.result.nickname;
